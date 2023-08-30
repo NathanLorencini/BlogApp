@@ -162,7 +162,7 @@ namespace BlogApp.UnitTests.Implementation
 
 
         [Fact(DisplayName = "Ensure tha the Delete method delete a site")]
-        public void MyTestMethod()
+        public void Ensure_tha_the_Delete_method_delete_a_site()
         {
             // Arrange
             var site = new Site(1, "site1");
@@ -179,16 +179,18 @@ namespace BlogApp.UnitTests.Implementation
                 return add;
             });
 
-            var result = iRepository.Add(site);
+            iRepository.Add(site);
 
+            var getSite = iRepository.GetById(Arg.Any<int>()).Returns(site);
 
             // Act
             iRepository.Delete(1);
 
+            var getSiteDeleted = iRepository.GetById(Arg.Any<int>()).Returns(site);
 
             // Assert
             iRepository.Received(1).Delete(site.SiteId);
-
+            iRepository.DidNotReceive().Delete(2);
         }
     }
 }
