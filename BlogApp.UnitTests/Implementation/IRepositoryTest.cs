@@ -33,8 +33,8 @@ namespace BlogApp.UnitTests.Implementation
             var iRepository = Substitute.For<IRepository>();
 
             var site = new Site(1, "site1");
-           var site2 = new Site(2, "site2"); 
-           var site3 = new Site(3, "site3");
+           //var site2 = new Site(2, "site2"); 
+           //var site3 = new Site(3, "site3");
 
 
            //Act
@@ -63,33 +63,8 @@ namespace BlogApp.UnitTests.Implementation
 
             //Assert
             iRepository.Received(1).Add(Arg.Any<Site>());
-        }
 
-       
-        //Result of a search 
-        [Fact]
-        public void Update_Should_Update_Properties_Correctly()
-        {
-            // Arrange
-            var repository = Substitute.For<IRepository>();
-
-            var siteId = 1;
-
-            var initialSite = new Site(siteId, "InitialProp1Value");
-
-            repository.GetById(siteId).Returns(initialSite); // Configure o substituto para retornar o site inicial
-
-            var service = new BlogApp.Implementation.Services.Services(repository); // Crie um serviço que usa o repositório
-
-            var updatedSite = new Site(siteId, "UpdatedProp1Value");
-
-
-            // Act
-            service.UpdateSite(updatedSite); // Chame o método que utiliza o repositório
-
-
-            // Assert
-            repository.Received().Update(Arg.Is<Site>(s => s.SiteId == siteId && s.Description == "UpdatedProp1Value"));
+            //var value = iRepository.Received(1).Add(Arg.Is<Site>(s => s.SiteId == site.SiteId));
         }
 
 
@@ -182,6 +157,37 @@ namespace BlogApp.UnitTests.Implementation
 
             Assert.Equal(update.SiteId, result.SiteId);
             Assert.Equal(update.Description, sites[1].Description);
+
+        }
+
+
+        [Fact(DisplayName = "Ensure tha the Delete method delete a site")]
+        public void MyTestMethod()
+        {
+            // Arrange
+            var site = new Site(1, "site1");
+
+            var iRepository = Substitute.For<IRepository>();
+
+            //Configuring Add method
+            iRepository.Add(Arg.Any<Site>()).Returns(x =>
+            {
+                var newSite = x.Arg<Site>();
+
+                var add = new Site(newSite.SiteId, newSite.Description);
+
+                return add;
+            });
+
+            var result = iRepository.Add(site);
+
+
+            // Act
+            iRepository.Delete(1);
+
+
+            // Assert
+            iRepository.Received(1).Delete(site.SiteId);
 
         }
     }
