@@ -20,6 +20,7 @@ namespace BlogApp.UnitTests.Implementation.Services
         private static readonly Site Site = new(1, "Description");
 
 
+
         [Fact(DisplayName = "Ensure that the DeleteSite method delete a site")]
         public void Ensure_that_the_DeleteSite_method_delete_a_site()
         {
@@ -44,24 +45,46 @@ namespace BlogApp.UnitTests.Implementation.Services
 
             Assert.Equal(deletedSiteId, site.SiteId);
         }
-
-
+        
+        
         [Fact(DisplayName = "Ensure that the AddSite method add a site")]
         public void Ensure_that_the_AddSite_method_add_a_site()
         {
             // Arrange
             var repository = Repository;
             var siteService = SiteService;
-            
-            //repository.Add(Arg.Any<Site>()).Returns(Arg.Is<int>());
+
+            repository.Add(Arg.Any<Site>()).Returns(x =>
+            {
+                var newSite = x.Arg<Site>();
+
+                var add = new Site(newSite.SiteId, newSite.Description);
+
+                //countSite++;
+
+                return add;
+            });
+
+
             
             // Act
             siteService.AddSite(Site);
-
-            // Assert
             
+            // Assert
 
-            //repository.Received(1).Add(Arg.Any<Site>());
+
+
+
+            //repository.Received(1).Add(Arg.Any<Site>()).Returns(x =>
+            //{
+            //    var newSite = x.Arg<Site>();
+
+            //    var add = new Site(newSite.SiteId, newSite.Description);
+
+            //    //siteService.AddSite(add);
+
+            //    return add;
+            //});
         }
 
 
@@ -83,7 +106,7 @@ namespace BlogApp.UnitTests.Implementation.Services
 
             //    var add = new Site(newSite.SiteId, newSite.Description);
 
-            //    return add;
+            //    return add.ToString()!.Length;
             //});
 
 
@@ -120,7 +143,7 @@ namespace BlogApp.UnitTests.Implementation.Services
         }
 
 
-        [Fact(DisplayName = "Ensure that the GetAll method get all")]
+        [Fact(DisplayName = "Ensure that the GetAllSites method get all")]
         public void Ensure_that_the_GetAll_method_get_all_sites()
         {
             // Arrange
@@ -138,7 +161,7 @@ namespace BlogApp.UnitTests.Implementation.Services
 
 
             // Act
-            var getSites = siteService.GetAll();
+            var getSites = siteService.GetAllSites();
 
             // Assert
             repository.Received().GetAll();

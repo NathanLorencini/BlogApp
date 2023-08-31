@@ -51,7 +51,7 @@
 //            //var result2 = iRepository.Add(site2);
 //            //var result3= iRepository.Add(site3);
 
-//            //iRepository.GetAll().Returns(new List<Site>
+//            //iRepository.GetAllSites().Returns(new List<Site>
 //            //{
 //            //    result,
 //            //    result2,
@@ -59,7 +59,7 @@
 //            //});
 
 
-//            //var count = iRepository.GetAll().Count;
+//            //var count = iRepository.GetAllSites().Count;
 
 //            //Assert
 //            iRepository.Received(1).Add(Arg.Any<Site>());
@@ -96,7 +96,7 @@
 //            //Arrange
 //            var iRepository = Substitute.For<IRepository>();
 
-//            iRepository.GetAll().Returns(new List<Site>
+//            iRepository.GetAllSites().Returns(new List<Site>
 //                {
 //                    new(1, "site1"),
 //                    new(2, "site2"),
@@ -105,11 +105,11 @@
 
 
 //            //Act
-//            var result = iRepository.GetAll();
+//            var result = iRepository.GetAllSites();
 
 
 //            //Assert
-//            iRepository.Received(1).GetAll();
+//            iRepository.Received(1).GetAllSites();
 //            Assert.Equal(3, result.Count);
 //            Assert.Equal(1, result[0].SiteId);
 //            Assert.Equal(2, result[1].SiteId);
