@@ -28,7 +28,7 @@ namespace BlogApp.Implementation.Repositories
 
         public Site Update(Site sites)
         {
-            var updateSite = _sites.FirstOrDefault(x => x.SiteId == sites.SiteId);
+            var updateSite = GetById(sites.SiteId);
 
             if (updateSite != null)
             {
@@ -42,7 +42,7 @@ namespace BlogApp.Implementation.Repositories
 
         public void Delete(int id)
         {
-            var removedSite = _sites.FirstOrDefault(x => x.SiteId == id);
+            var removedSite = GetById(id);
 
             if (removedSite != null)
             {

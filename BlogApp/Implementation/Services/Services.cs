@@ -1,4 +1,5 @@
-﻿using BlogApp.Implementation.Repositories;
+﻿using System.Collections.Generic;
+using BlogApp.Implementation.Repositories;
 using BlogApp.Sites;
 
 namespace BlogApp.Implementation.Services
@@ -12,9 +13,15 @@ namespace BlogApp.Implementation.Services
             _repository = repository;
         }
 
-        public void AddSite(Site site)
+        public Site AddSite(Site site)
         {
             _repository.Add(site);
+            return site;
+        }
+
+        public List<Site> GetAll()
+        {
+            return _repository.GetAll();
         }
 
         public Site GetBySiteId(int siteId)
@@ -22,9 +29,10 @@ namespace BlogApp.Implementation.Services
             return _repository.GetById(siteId);
         }
 
-        public void UpdateSite(Site site)
+        public Site UpdateSite(Site site)
         {
             _repository.Update(site);
+            return site;
         }
 
         public void DeleteSite(Site site)

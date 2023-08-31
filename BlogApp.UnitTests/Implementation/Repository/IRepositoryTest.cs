@@ -4,7 +4,7 @@ using BlogApp.Sites;
 using NSubstitute;
 using Xunit;
 
-namespace BlogApp.UnitTests.Implementation
+namespace BlogApp.UnitTests.Implementation.Repository
 {
     public class IRepositoryTest
     {
@@ -33,17 +33,17 @@ namespace BlogApp.UnitTests.Implementation
             var iRepository = Substitute.For<IRepository>();
 
             var site = new Site(1, "site1");
-           //var site2 = new Site(2, "site2"); 
-           //var site3 = new Site(3, "site3");
+            //var site2 = new Site(2, "site2"); 
+            //var site3 = new Site(3, "site3");
 
 
-           //Act
+            //Act
             iRepository.Add(Arg.Any<Site>()).Returns(x =>
             {
                 var newSite = x.Arg<Site>();
 
                 var add = new Site(newSite.SiteId, newSite.Description);
-                
+
                 return add;
             });
 
@@ -74,7 +74,7 @@ namespace BlogApp.UnitTests.Implementation
             //Arrange
             Site site = new Site(Id, Description);
 
-            var iRepository = Substitute.For<Repository>();
+            var iRepository = Substitute.For<IRepository>();
 
             iRepository.Add(site);
 
