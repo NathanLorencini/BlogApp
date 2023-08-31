@@ -19,11 +19,11 @@ namespace BlogApp.Implementation.Repositories
             return _sites.ToList();
         }
 
-        public Site Add(Site sites)
+        public int Add(Site sites)
         {
             _sites.Add(sites);
 
-            return sites;
+            return _sites.Count;
         }
 
         public Site Update(Site sites)

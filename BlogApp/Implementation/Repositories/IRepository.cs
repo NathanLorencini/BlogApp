@@ -6,9 +6,13 @@ namespace BlogApp.Implementation.Repositories
     public interface IRepository
     {
         Site GetById(int id);
+
         List<Site> GetAll();
-        Site Add(Site sites);
+        
+        int Add(Site sites);
+        
         Site Update(Site entity);
+        
         void Delete(int id);
     }
 }
