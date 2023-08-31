@@ -13,14 +13,14 @@ namespace BlogApp.Implementation.Services
             _repository = repository;
         }
 
-        public int AddSite(Site site)
+        public Site AddSite(Site site)
         {
             _repository.Add(site);
 
-            return GetAll().Count;
+            return site;
         }
 
-        public List<Site> GetAll()
+        public List<Site> GetAllSites()
         {
             return _repository.GetAll();
         }

@@ -7,7 +7,7 @@ namespace BlogApp.Implementation.Repositories
 {
     public class Repository : IRepository
     {
-        private readonly List<Site> _sites = new();
+        public List<Site> _sites = new();
 
         public Site GetById(int id)
         {
@@ -19,11 +19,11 @@ namespace BlogApp.Implementation.Repositories
             return _sites.ToList();
         }
 
-        public int Add(Site sites)
+        public Site Add(Site sites)
         {
             _sites.Add(sites);
 
-            return _sites.Count;
+            return sites;
         }
 
         public Site Update(Site sites)

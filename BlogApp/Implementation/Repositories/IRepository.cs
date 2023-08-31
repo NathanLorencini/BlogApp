@@ -9,7 +9,7 @@ namespace BlogApp.Implementation.Repositories
 
         List<Site> GetAll();
         
-        int Add(Site sites);
+        Site Add(Site sites);
         
         Site Update(Site entity);
         
